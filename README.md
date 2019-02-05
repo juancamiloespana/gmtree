@@ -12,4 +12,3 @@ if (!require('devtools')) install.packages('devtools')
 devtools::install_github('juancamiloespana/gmtree', force=TRUE)
 ```
 
-probar algunos cambios
