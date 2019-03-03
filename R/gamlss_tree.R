@@ -46,7 +46,7 @@ gamlss_tree<-function(form, datos, n_dist_mod=4,var_sel="aicmodelo", steps=2,
                                   "BCTo","WEI3", "LOGNO", "EXP", "PARETO2","IG",
                                   "IGAMMA","NO"),
                       cyc=50, prueba_hip=TRUE, acepta_h=FALSE, type="counts",
-                      arbol_activo=TRUE)
+                      arbol_activo=TRUE,minobs=30)
 {  
   options(warn=-1)
   require(stats)
@@ -85,7 +85,7 @@ gamlss_tree<-function(form, datos, n_dist_mod=4,var_sel="aicmodelo", steps=2,
   {      
     if(arbol_activo==T)
     {
-      arbol_cart<-rpart(fo,data=datos_train)
+      arbol_cart<-rpart(fo,data=datos_train, control=rpart.control(minbucket = minobs))
       arbol_cart_comm[[p]]<-arbol_cart
       names( arbol_cart_comm)[p]=paste("commit",p,sep="")
       variables_arb<-names(arbol_cart$variable.importance)
